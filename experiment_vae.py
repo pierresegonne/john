@@ -48,7 +48,7 @@ def argparser():
     gs = parser.add_argument_group('General settings')
     gs.add_argument('--model', type=str, default='vae', help='model to use')
     gs.add_argument('--dataset', type=str, default='fashionmnist', help='dataset to use')
-    gs.add_argument('--cuda', type=bool, default=True, help='use cuda')
+    gs.add_argument('--cuda', type=bool, default=False, help='use cuda')
     
     ms = parser.add_argument_group('Model specific settings')
     ms.add_argument('--batch_size', type=int, default=512, help='batch size')
@@ -97,7 +97,7 @@ class basemodel(nn.Module):
         if self.switch:
             p_dist = D.Independent(D.Normal(x_mu, x_var+epsilon), 1)
         else:
-            p_dist = D.Independent(D.Bernoulli(x_mu), 1)
+            p_dist = D.Independent(D.Bernoulli(x_mu, validate_args=False), 1)
         
         prior = D.Independent(D.Normal(torch.zeros_like(z),
                                        torch.ones_like(z)), 1)
