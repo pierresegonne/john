@@ -37,4 +37,4 @@ python3 -m venv env
 source env/bin/activate
 python3 -m pip install -r requirements.txt
 export PYTHONIOENCODING=utf8
-python experiment_vae.py --dataset mnist --iters 20000 --cuda --lr 0.001 --latent_size 2
+python experiment_vae.py --dataset mnist --iters 20000 --cuda 1 --lr 0.001 --latent_size 2
